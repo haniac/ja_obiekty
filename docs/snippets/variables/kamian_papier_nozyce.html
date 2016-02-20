@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    var moves={
+        rock: {},
+        paper: {},
+        scissors: {}
+    };
+    var p1=[moves.rock,moves.paper,moves.paper,moves.rock];
+    var p2=[moves.paper,moves.rock, moves.paper,moves.scissors];
+
+    moves.rock.beats=moves.scissors;
+    moves.paper.beats=moves.rock;
+    moves.scissors.beats=moves.paper;
+
+    function gra(gracz1,gracz2) {
+        var wyniki = [];
+
+        if (gracz1.length !== gracz2.length) {
+            return('gracze musza wykonac rowna liczbe ruchow!');
+        }
+
+        for (i = 0; i < gracz1.length; i++) {
+            wyniki.push(whoWins(gracz1[i], gracz2[i]));
+            //wyniki.push( gracz1[i].beats === gracz2[i] ? 'gracz1 wins' : ( gracz1[i] === gracz2[i] ? 'draw' : 'gracz2 wins' ) );
+        }
+        function whoWins(p1move, p2move) {
+            return p1move !== p2move ? (p1move.beats === p2move ? 'p1 wins' : 'p2 wins') : 'draw'
+        }
+
+
+
+        return wyniki.join(", \n");
+    }
+
+
+
+    Array.prototype.zip = function (a, callback) {
+        return this.map(function (b, index) {
+            return callback(a[index], b);
+        });
+    };
+
+    var aa=[2,6,9,12,6];
+    var bb=[2,2,5,1,16];
+
+    var ziprezultat= aa.zip(bb, function(c,d) {
+        return c-d;
+    });
+
+
+
+
+    console.log(gra(p1,p2));
+    console.log(ziprezultat);
+
+</script>
+
+</body>
+</html>

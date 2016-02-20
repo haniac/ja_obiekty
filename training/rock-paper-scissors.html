@@ -1,0 +1,58 @@
+<script>
+ var moves = {
+   rock: {},
+   paper: {},
+   scissors: {}
+ };
+ moves.rock.beats = moves.scissors;
+ moves.scissors.beats = moves.paper;
+ moves.paper.beats = moves.rock;
+
+ Array.prototype.zip = function (secondArray, callback) {
+   return this.map(function (firstArrayItem, index) {
+     return callback(firstArrayItem, secondArray[index]);
+   });
+ };
+
+ function whoWins(p1move, p2move) {
+   return p1move !== p2move ? (p1move.beats === p2move ? 'p1 wins' : 'p2 wins') : 'draw'
+ }
+
+ var p1 = [moves.rock, moves.paper, moves.paper];
+ var p2 = [moves.paper, moves.paper, moves.scissors];
+
+ function play(p1moves, p2moves) {
+   return p1moves.zip(p2moves, whoWins);
+ }
+
+ var result = play(p1, p2);
+ var final = result.filter(function (item) {return item === 'p2 wins'}).length > result.filter(function (item) {return item === 'p1 wins'}).length ? 'p2 is the winner' : 'p1 is the winner';
+
+ var numbersA = [11, 35, 23, 40];
+ var numbersB = [3, 4, 8, 1];
+
+
+
+ var numbersResult = numbersA.zip(numbersB, function(a, b) {
+  return a - b;
+ });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
